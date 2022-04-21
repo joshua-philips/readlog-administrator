@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.ListUsersPage;
 import com.google.firebase.auth.UserMetadata;
+import com.google.firebase.auth.UserRecord;
 import com.joshuaphilips.readlogadministrator.models.UserObject;
 
 @Service
@@ -36,5 +37,21 @@ public class UserService {
 		}
 
 		return users;
+	}
+
+	public UserObject getUser(String uid) throws FirebaseAuthException {
+		UserRecord userRecord = firebaseAuth.getUser(uid);
+		LocalDateTime dateCreated = LocalDateTime.ofInstant(
+				Instant.ofEpochMilli(userRecord.getUserMetadata().getCreationTimestamp()),
+				TimeZone.getDefault().toZoneId());
+
+		LocalDateTime lastSignedIn = LocalDateTime.ofInstant(
+				Instant.ofEpochMilli(userRecord.getUserMetadata().getLastSignInTimestamp()),
+				TimeZone.getDefault().toZoneId());
+
+		UserObject user = new UserObject(userRecord.getDisplayName(), userRecord.getEmail(), userRecord.getUid(),
+				userRecord.getPhotoUrl(), dateCreated, lastSignedIn);
+
+		return user;
 	}
 }

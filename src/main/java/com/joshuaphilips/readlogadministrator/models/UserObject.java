@@ -13,7 +13,7 @@ public class UserObject {
 	private String name;
 	private String email;
 	private String uid;
-	String photoUrl;
+	private String photoUrl;
 	private LocalDateTime dateCreated;
 	private LocalDateTime lastSignedIn;
 
