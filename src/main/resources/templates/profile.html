@@ -70,6 +70,22 @@ body {
                         <h4 th:text="${signedIn}">Last Sign In</h4>
                         <h6>Last Signed In</h6>
                     </div>
+                    <div class="p-3 bg-success text-center skill-block">
+                        <a
+							th:href="@{'/books/' + ${user.uid}}"
+							href="/"
+							class=" h1 btn btn-light"
+						>></a>
+						<h6>Books</h6>
+                    </div>
+                    <div class="p-3 bg-primary text-center skill-block">
+                        <a
+							th:href="@{'/readingList/' + ${user.uid}}"
+							href="/"
+							class="h1 btn btn-light"
+						>></a>
+						<h6>Reading List</h6>
+                    </div>
                 </div>
             </div>
         </div>
