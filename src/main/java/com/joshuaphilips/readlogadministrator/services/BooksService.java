@@ -24,7 +24,10 @@ public class BooksService {
 
 		List<Book> books = new ArrayList<>();
 		for (DocumentSnapshot document : documents) {
-			books.add(document.toObject(Book.class));
+			Book book = document.toObject(Book.class);
+			book.setId(document.getId());
+			books.add(book);
+
 		}
 
 		return books;
@@ -41,5 +44,25 @@ public class BooksService {
 
 		return books;
 
+	}
+
+	public Book getBookFromMyBooks(String uid, String bookId) throws InterruptedException, ExecutionException {
+		ApiFuture<DocumentSnapshot> future = firestore.collection("user").document(uid).collection("books")
+				.document(bookId).get();
+		DocumentSnapshot document = future.get();
+		Book book = document.toObject(Book.class);
+		book.setId(document.getId());
+
+		return book;
+	}
+
+	public Book getBookFromReading(String uid, String bookId) throws InterruptedException, ExecutionException {
+		ApiFuture<DocumentSnapshot> future = firestore.collection("user").document(uid).collection("readingList")
+				.document(bookId).get();
+		DocumentSnapshot document = future.get();
+		Book book = document.toObject(Book.class);
+		book.setId(document.getId());
+
+		return book;
 	}
 }

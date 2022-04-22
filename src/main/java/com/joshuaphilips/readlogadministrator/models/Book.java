@@ -26,5 +26,6 @@ public class Book {
 	private List<Link> links;
 	private String review;
 	private Timestamp dateAdded;
+	private String id;
 
 }
