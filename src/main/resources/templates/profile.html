@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Read Log Admin</title>
+<title th:text="${user.name}">Read Log Admin</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -15,7 +15,7 @@
 	crossorigin="anonymous"
 ></script>
 <style>
-img {
+.profile-pic {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -76,17 +76,18 @@ img {
 }
 </style>
 </head>
-<body>
+<body class="bg-light">
 	<div class="container">
 		<div th:insert="components/navbar :: navbar"></div>
 	</div>
-	<div class="container mt-5 mb-5">
+	<div class="container mb-5">
 		<div class="row no-gutters">
 			<div class="col-md-4 col-lg-4">
 				<img
 					src=""
 					th:src="@{${user.photoUrl}}"
 					alt="..."
+					class="profile-pic"
 				>
 			</div>
 			<div class="col-md-8 col-lg-8">
@@ -111,21 +112,19 @@ img {
 							<h4 th:text="${signedIn}">Last Sign In</h4>
 							<h6>Last Signed In</h6>
 						</div>
-						<div class="p-3 bg-success text-center skill-block">
+						<div class="p-3 pt-5 bg-success text-center skill-block">
 							<a
 								th:href="@{'/books/' + ${user.uid}}"
 								href="/"
-								class=" h1 btn btn-light"
-							>></a>
-							<h6>Books</h6>
+								class="text-decoration-none text-light mt-5"
+							><h4>Books</h4></a>
 						</div>
-						<div class="p-3 bg-primary text-center skill-block">
+						<div class="p-3 pt-5 bg-primary text-center skill-block">
 							<a
 								th:href="@{'/readingList/' + ${user.uid}}"
 								href="/"
-								class="h1 btn btn-light"
-							>></a>
-							<h6>Reading List</h6>
+								class="text-decoration-none text-light mt-5"
+							><h4>Reading List</h4></a>
 						</div>
 					</div>
 				</div>
@@ -135,11 +134,14 @@ img {
 		<hr />
 		<div class="books my-books">
 			<div th:each="book: ${books}">
-				<div
-					th:if="${book.coverImage != ''}"
-					class="bg-dark"
-				>
-					<a href="#"><img
+				<div th:if="${book.coverImage != ''}">
+					<a
+						href="#"
+						th:href="@{'/books/' + ${user.uid} + '/book?bookId=' + ${book.id}}"
+						data-toggle="tooltip"
+						data-placement="top"
+						th:attr="title=${book.title}"
+					><img
 						src=""
 						th:src="@{${book.coverImage}}"
 						alt="..."
@@ -149,6 +151,10 @@ img {
 					<a
 						href="#"
 						class="text-decoration-none"
+						th:href="@{'/books/' + ${user.uid} + '/book?bookId=' + ${book.id}}"
+						data-toggle="tooltip"
+						data-placement="top"
+						th:attr="title=${book.title}"
 					><div class="replace-img bg-secondary">
 							<h4
 								th:text="${book.title}"
