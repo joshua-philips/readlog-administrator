@@ -11,12 +11,18 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.cloud.FirestoreClient;
 import com.joshuaphilips.readlogadministrator.models.Book;
 
 @Service
 public class BooksService {
-	private Firestore firestore = FirestoreClient.getFirestore();
+	private Firestore firestore;
+
+	public BooksService() {
+		firestore = FirestoreClient.getFirestore(FirebaseApp.getInstance());
+
+	}
 
 	public List<Book> getUsersBooks(String uid) throws InterruptedException, ExecutionException {
 		ApiFuture<QuerySnapshot> future = firestore.collection("user").document(uid).collection("books").get();

@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Objects;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -15,8 +17,13 @@ import com.google.firebase.FirebaseOptions;
 @SpringBootApplication
 public class ReadlogAdministratorApplication {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 
+		SpringApplication.run(ReadlogAdministratorApplication.class, args);
+	}
+
+	@PostConstruct
+	public void initialize() throws IOException {
 		ClassLoader classLoader = ReadlogAdministratorApplication.class.getClassLoader();
 		File file = new File(Objects.requireNonNull(classLoader.getResource("serviceAccountKey.json")).getFile());
 
@@ -28,8 +35,6 @@ public class ReadlogAdministratorApplication {
 				.setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
 
 		FirebaseApp.initializeApp(options);
-
-		SpringApplication.run(ReadlogAdministratorApplication.class, args);
 	}
 
 }
