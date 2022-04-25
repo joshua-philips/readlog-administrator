@@ -1,9 +1,7 @@
 package com.joshuaphilips.readlogadministrator;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Objects;
+import java.io.InputStream;
 
 import javax.annotation.PostConstruct;
 
@@ -25,10 +23,7 @@ public class ReadlogAdministratorApplication {
 	@PostConstruct
 	public void initialize() throws IOException {
 		ClassLoader classLoader = ReadlogAdministratorApplication.class.getClassLoader();
-		File file = new File(Objects.requireNonNull(classLoader.getResource("serviceAccountKey.json")).getFile());
-
-		String filePath = file.getAbsolutePath().replace("%20", " "); // Dealing with spaces in the path
-		FileInputStream serviceAccount = new FileInputStream(filePath);
+		InputStream serviceAccount = classLoader.getResourceAsStream("serviceAccountKey.json");
 
 		@SuppressWarnings("deprecation")
 		FirebaseOptions options = new FirebaseOptions.Builder()
