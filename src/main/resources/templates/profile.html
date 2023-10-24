@@ -1,169 +1,169 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="ISO-8859-1">
-<title th:text="${user.name}">Read Log Admin</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous"
->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"
-></script>
-<style>
-.profile-pic {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title th:text="${user.name}">Read Log Admin</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      .profile-pic {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
-.bg-black {
-	background: #000;
-}
+      .bg-black {
+        background: #000;
+      }
 
-.skill-block {
-	width: 30%;
-}
-/* Books */
-.books {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-	justify-content: center;
-	align-content: center;
-	align-items: center;
-	gap: 10px;
-}
+      .skill-block {
+        width: 30%;
+      }
+      /* Books */
+      .books {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        gap: 10px;
+      }
 
-.replace-img {
-	width: 220px;
-	height: 380px;
-	display: flex;
-	align-items: center;
-	padding-left: 20px;
-	padding-right: 20px;
-	text-align: center;
-	border-radius: 3px;
-	border: 1.5px solid gray;
-}
+      .replace-img {
+        width: 220px;
+        height: 380px;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: center;
+        border-radius: 3px;
+        border: 1.5px solid gray;
+        background-color: #2b2333;
+      }
 
-.replace-img h4 {
-	margin: auto;
-}
+      .replace-img h4 {
+        margin: auto;
+      }
 
-.books img {
-	width: 220px;
-	height: 380px;
-	object-fit: cover;
-	border-radius: 4px;
-	border-radius: 3px;
-	border: 1.5px solid gray;
-}
+      .books img {
+        width: 220px;
+        height: 380px;
+        object-fit: cover;
+        border-radius: 4px;
+        border-radius: 3px;
+        border: 1.5px solid gray;
+      }
 
-@media ( min-width : 991px) and (max-width:1200px) {
-	.skill-block {
-		padding: 32px !important;
-	}
-}
+      @media (min-width: 991px) and (max-width: 1200px) {
+        .skill-block {
+          padding: 32px !important;
+        }
+      }
 
-@media ( min-width : 1200px) {
-	.skill-block {
-		padding: 56px !important;
-	}
-}
-</style>
-</head>
-<body class="bg-light">
-	<div class="container">
-		<div th:insert="components/navbar :: navbar"></div>
-	</div>
-	<div class="container mb-5">
-		<div class="row no-gutters">
-			<div class="col-md-4 col-lg-4">
-				<img
-					src=""
-					th:src="@{${user.photoUrl}}"
-					alt="..."
-					class="profile-pic"
-				>
-			</div>
-			<div class="col-md-8 col-lg-8">
-				<div class="d-flex flex-column">
-					<div
-						class="d-flex flex-row justify-content-between align-items-center p-5 bg-dark text-white"
-					>
-						<h3
-							class="display-5"
-							th:text="${user.name}"
-						>Name</h3>
-					</div>
-					<div class="px-5 py-2 bg-black text-white">
-						<h6 th:text="${user.email}">Email</h6>
-					</div>
-					<div class="d-flex flex-row text-white">
-						<div class="p-4 bg-danger text-center skill-block">
-							<h4 th:text="${created}">Created</h4>
-							<h6>Created</h6>
-						</div>
-						<div class="p-3 bg-warning text-center skill-block">
-							<h4 th:text="${signedIn}">Last Sign In</h4>
-							<h6>Last Signed In</h6>
-						</div>
-						<div class="p-3 pt-5 bg-success text-center skill-block">
-							<a
-								th:href="@{'/books/' + ${user.uid}}"
-								href="/"
-								class="text-decoration-none text-light mt-5"
-							><h4>Books</h4></a>
-						</div>
-						<div class="p-3 pt-5 bg-primary text-center skill-block">
-							<a
-								th:href="@{'/readingList/' + ${user.uid}}"
-								href="/"
-								class="text-decoration-none text-light mt-5"
-							><h4>Reading List</h4></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<h1 class="mt-5">Recent Books</h1>
-		<hr />
-		<div class="books my-books">
-			<div th:each="book: ${books}">
-				<div th:if="${book.coverImage != ''}">
-					<a
-						href="#"
-						th:href="@{'/books/' + ${user.uid} + '/book?bookId=' + ${book.id}}"
-						data-toggle="tooltip"
-						data-placement="top"
-						th:attr="title=${book.title}"
-					><img
-						src=""
-						th:src="@{${book.coverImage}}"
-						alt="..."
-					></a>
-				</div>
-				<div th:if="${book.coverImage == ''}">
-					<a
-						href="#"
-						class="text-decoration-none"
-						th:href="@{'/books/' + ${user.uid} + '/book?bookId=' + ${book.id}}"
-						data-toggle="tooltip"
-						data-placement="top"
-						th:attr="title=${book.title}"
-					><div class="replace-img bg-secondary">
-							<h4
-								th:text="${book.title}"
-								class="text-white text-decoration-none"
-							>Placeholder</h4>
-						</div></a>
-				</div>
-			</div>
-		</div>
-	</div>
-</body>
+      @media (min-width: 1200px) {
+        .skill-block {
+          padding: 56px !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div class="container">
+      <div th:insert="components/navbar :: navbar"></div>
+    </div>
+    <div class="container mb-5">
+      <div class="row no-gutters">
+        <div class="col-md-4 col-lg-4">
+          <img
+            src=""
+            th:src="@{${user.photoUrl}}"
+            alt="..."
+            class="profile-pic"
+          />
+        </div>
+        <div class="col-md-8 col-lg-8">
+          <div class="d-flex flex-column">
+            <div
+              class="d-flex flex-row justify-content-between align-items-center p-5 bg-dark text-white"
+            >
+              <h3 class="display-5" th:text="${user.name}">Name</h3>
+            </div>
+            <div class="px-5 py-2 bg-black text-white">
+              <h6 th:text="${user.email}">Email</h6>
+            </div>
+            <div class="d-flex flex-row text-white">
+              <div class="p-4 bg-danger text-center skill-block">
+                <h4 th:text="${created}">Created</h4>
+                <h6>Created</h6>
+              </div>
+              <div class="p-3 bg-warning text-center skill-block">
+                <h4 th:text="${signedIn}">Last Sign In</h4>
+                <h6>Last Signed In</h6>
+              </div>
+              <div class="p-3 pt-5 bg-success text-center skill-block">
+                <a
+                  th:href="@{'/books/' + ${user.uid}}"
+                  href="/"
+                  class="text-decoration-none text-light mt-5"
+                  ><h4>Books</h4></a
+                >
+              </div>
+              <div class="p-3 pt-5 bg-primary text-center skill-block">
+                <a
+                  th:href="@{'/readingList/' + ${user.uid}}"
+                  href="/"
+                  class="text-decoration-none text-light mt-5"
+                  ><h4>Reading List</h4></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h1 class="mt-5">Recent Books</h1>
+      <hr />
+      <div class="books my-books">
+        <div th:each="book: ${books}">
+          <div th:if="${book.coverImage != ''}">
+            <a
+              href="#"
+              th:href="@{'/books/' + ${user.uid} + '/book?bookId=' + ${book.id}}"
+              data-toggle="tooltip"
+              data-placement="top"
+              th:attr="title=${book.title}"
+              ><img src="" th:src="@{${book.coverImage}}" alt="..."
+            /></a>
+          </div>
+          <div th:if="${book.coverImage == ''}">
+            <a
+              href="#"
+              class="text-decoration-none"
+              th:href="@{'/books/' + ${user.uid} + '/book?bookId=' + ${book.id}}"
+              data-toggle="tooltip"
+              data-placement="top"
+              th:attr="title=${book.title}"
+              ><div class="replace-img">
+                <h4
+                  th:text="${book.title}"
+                  class="text-white text-decoration-none"
+                >
+                  Placeholder
+                </h4>
+              </div></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
