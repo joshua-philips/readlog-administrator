@@ -28,11 +28,10 @@ public class UsersController {
 	public String home(Model model) throws FirebaseAuthException {
 		List<UserObject> users = userService.getAllUsers();
 		model.addAttribute("users", users);
-
 		return "index";
 	}
 
-	@GetMapping(value = "/{uid}")
+	@GetMapping(value = "/user/{uid}")
 	public String getUserRecord(@PathVariable String uid, Model model)
 			throws FirebaseAuthException, InterruptedException, ExecutionException {
 		UserObject user = userService.getUser(uid);
