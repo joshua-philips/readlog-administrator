@@ -1,5 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --primary-color-one: #2b2333;
+  --primary-color-two: #c5938c;
+
+  --error-color: #e23d24;
+  --success-color: #43b726;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-weight: normal;
+}
+
+body {
+  font-family: "Hind Madurai", sans-serif;
+}
+
+.login-page {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.background {
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.login-card {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  z-index: 99999;
+  background: white;
+  width: 40vw;
+}
+
+.form-card-left {
+  height: 100%;
+}
+
+.form-card-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+}
+
+.form h2 {
+  margin-bottom: 10px;
+}
+
+input {
+  outline: 0;
+  background: ghostwhite;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 15px;
+  border: 0;
+  background: var(--primary-color-two);
+  margin: 0 0 15px;
+}
+
+button:hover {
+  background: var(--primary-color-one);
+  color: white;
+}
+
+.error-alert {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-transform: capitalize;
+  color: var(--error-color);
+}
+
+.success-alert {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-transform: capitalize;
+  color: var(--success-color);
+}
+
+@media screen and (max-width: 1280px) {
+  .login-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 90%;
+    max-width: 30rem;
+  }
 }

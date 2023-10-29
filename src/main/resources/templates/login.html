@@ -6,17 +6,48 @@
     <link th:href="@{/css/style.css}" rel="stylesheet" />
   </head>
   <body>
-    <h2>Login</h2>
-    <div th:if="${param.error}">Invalid username or password.</div>
-    <div th:if="${param.logout}">You have been logged out.</div>
-    <form th:action="@{/login}" method="post">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required />
-      <br />
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required />
-      <br />
-      <button type="submit">Login</button>
-    </form>
+    <div class="login-page">
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/books-log-1a587.appspot.com/o/susan-q-yin-2JIvboGLeho-unsplash%20(1).jpg?alt=media&token=dd00d80b-0132-48b3-a1a9-84b45de9e44b&_gl=1*hdid46*_ga*MTAxNjgyMzAyOC4xNjk3OTc4MDEw*_ga_CW55HF8NVT*MTY5ODU4MjE4MC43LjEuMTY5ODU4NDAyOS4yNy4wLjA."
+        alt=""
+        class="background"
+      />
+      <div class="login-card">
+        <div class="form-card-left">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/books-log-1a587.appspot.com/o/susan-q-yin-2JIvboGLeho-unsplash%20(1).jpg?alt=media&token=dd00d80b-0132-48b3-a1a9-84b45de9e44b&_gl=1*hdid46*_ga*MTAxNjgyMzAyOC4xNjk3OTc4MDEw*_ga_CW55HF8NVT*MTY5ODU4MjE4MC43LjEuMTY5ODU4NDAyOS4yNy4wLjA."
+            alt=""
+          />
+        </div>
+        <form th:action="@{/login}" method="post" class="form">
+          <h2>Login</h2>
+          <div th:if="${param.error}" class="error-alert">
+            Invalid username or password.
+          </div>
+          <div th:if="${param.logout}" class="success-alert">
+            You have been logged out.
+          </div>
+          <input
+            class="form-input"
+            type="text"
+            id="username"
+            name="username"
+            required
+            placeholder="Username"
+          />
+          <br />
+          <input
+            class="form-input"
+            type="password"
+            id="password"
+            name="password"
+            required
+            placeholder="Password"
+          />
+          <br />
+          <button class="form-button" type="submit">Login</button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
