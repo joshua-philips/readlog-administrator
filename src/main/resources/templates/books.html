@@ -3,66 +3,71 @@
   <head>
     <meta charset="ISO-8859-1" />
     <title th:text="${title}">Read Log Admin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
+      rel="shortcut icon"
+      href="https://raw.githubusercontent.com/joshua-philips/read_log_updated/master/assets/launcher.png"
+      type="image/x-icon"
     />
     <link th:href="@{/css/style.css}" rel="stylesheet" />
   </head>
   <body>
     <div>
-      <div th:insert="components/navbar :: navbar"></div>
+      <div th:insert="~{components/navbar :: navbar}"></div>
     </div>
-    <div>
-      <h1>
+    <div class="content">
+      <h3>
         <span th:text="${user.name}">Name</span>'s
         <span th:text="${title}">Books</span>
-      </h1>
+      </h3>
       <hr />
-      <div>
+      <br />
+      <div class="books">
         <div th:each="book: ${books}">
+          <!--  -->
+
           <div th:if="${book.coverImage != ''}">
-            <div th:if="${title == 'Books'}">
-              <a
-                href="#"
-                th:href="@{'/books/' + ${user.uid} + '/book?bookId=' + ${book.id}}"
-                th:attr="title=${book.title}"
-                ><img src="" th:src="@{${book.coverImage}}" alt="..."
-              /></a>
+            <a class="book" th:if="${title == 'Books'}" href="#" th:href="@{'/books/' + ${user.uid} + '/book?bookId=' + ${book.id}}">
+            <div class="cover" >
+              <img src="" th:src="@{${book.coverImage}}" alt="..."/>
             </div>
-            <div th:if="${title != 'Books'}">
-              <a
-                href="#"
-                th:href="@{'/books/' + ${user.uid} + '/readinglist?bookId=' + ${book.id}}"
-                th:attr="title=${book.title}"
-                ><img src="" th:src="@{${book.coverImage}}" alt="..."
-              /></a>
+            <div class="description">
+              <p class="title" th:text="${book.title}">Title</br>
             </div>
+          </a>
+          
+          <a class="book" th:if="${title != 'Books'}" href="#" th:href="@{'/books/' + ${user.uid} + '/readinglist?bookId=' + ${book.id}}"
+          >
+            <div class="cover" >
+              <img src="" th:src="@{${book.coverImage}}" alt="..."/>
+            </div>
+            <div class="description">
+              <p class="title" th:text="${book.title}">Title</br>
+            </div>
+          </a>
+        </div>
+
+
+        <!--  -->
+        <div th:if="${book.coverImage == ''}">
+          <a class="book" th:if="${title == 'Books'}" href="#" th:href="@{'/books/' + ${user.uid} + '/book?bookId=' + ${book.id}}">
+          <div class="placeholder" >
+            <p class="title" th:text="${book.title}">Title</br>
+            </div>
+          <div class="description">
+            <p class="title" th:text="${book.title}">Title</br>
           </div>
-          <div th:if="${book.coverImage == ''}">
-            <div th:if="${title == 'Books'}">
-              <a
-                href="#"
-                th:href="@{'/books/' + ${user.uid} + '/book?bookId=' + ${book.id}}"
-                th:attr="title=${book.title}"
-                ><div>
-                  <h4 th:text="${book.title}">Placeholder</h4>
-                </div></a
-              >
+        </a>
+        
+        <a class="book" th:if="${title != 'Books'}" href="#" th:href="@{'/books/' + ${user.uid} + '/readinglist?bookId=' + ${book.id}}"
+        >
+          <div class="placeholder" >
+            <p class="title" th:text="${book.title}">Title</br>
             </div>
-            <div th:if="${title != 'Books'}">
-              <a
-                href="#"
-                th:href="@{'/books/' + ${user.uid} + '/readinglist?bookId=' + ${book.id}}"
-                th:attr="title=${book.title}"
-                ><div>
-                  <h4 th:text="${book.title}">Placeholder</h4>
-                </div></a
-              >
-            </div>
+          <div class="description">
+            <p class="title" th:text="${book.title}">Title</br>
           </div>
+        </a>
+      </div>
         </div>
       </div>
     </div>

@@ -3,81 +3,72 @@
   <head>
     <meta charset="ISO-8859-1" />
     <title th:text="${user.name}">Read Log Admin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
+      rel="shortcut icon"
+      href="https://raw.githubusercontent.com/joshua-philips/read_log_updated/master/assets/launcher.png"
+      type="image/x-icon"
     />
     <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <style>
+
+
+    </style>
   </head>
   <body>
     <div>
-      <div th:insert="components/navbar :: navbar"></div>
+      <div th:insert="~{components/navbar :: navbar}"></div>
     </div>
-    <div>
-      <div>
-        <div>
-          <img
-            src=""
-            th:src="@{${user.photoUrl}}"
-            alt="..."
-            class="profile-pic"
-          />
-        </div>
-        <div>
+    <div class="content">
+      <div class="profile-card">
+        <img
+          src=""
+          class="profile-image"
+          th:src="@{${user.photoUrl}}"
+          alt="..."
+          width="300"
+          height="300"
+        />
+        <div class="profile-details">
           <div>
-            <div>
-              <h3 th:text="${user.name}">Name</h3>
-            </div>
-            <div>
-              <h6 th:text="${user.email}">Email</h6>
-            </div>
-            <div>
-              <div>
-                <h4 th:text="${created}">Created</h4>
-                <h6>Created</h6>
-              </div>
-              <div>
-                <h4 th:text="${signedIn}">Last Sign In</h4>
-                <h6>Last Signed In</h6>
-              </div>
-              <div>
-                <a th:href="@{'/books/' + ${user.uid}}" href="/"
-                  ><h4>Books</h4></a
-                >
-              </div>
-              <div>
-                <a th:href="@{'/readingList/' + ${user.uid}}" href="/"
-                  ><h4>Reading List</h4></a
-                >
-              </div>
+            <h3 th:text="${user.name}">Name</h3>
+            <h6 th:text="${user.email}">Email</h6>
+            <h4 th:text="${created}">Created</h4>
+            <h6>Created</h6>
+            <h4 th:text="${signedIn}">Last Sign In</h4>
+            <h6>Last Signed In</h6>
+            <div class="profile-links">
+              <a th:href="@{'/books/' + ${user.uid}}" href="/" class="link">Books</a
+              ><a th:href="@{'/readingList/' + ${user.uid}}" href="/" class="link"
+                >Reading List</a
+              >
             </div>
           </div>
         </div>
       </div>
-      <h1 class="mt-5">Recent Books</h1>
+
+      <br/>
+      <h3>Recent Books</h3>
       <hr />
-      <div>
-        <div th:each="book: ${books}">
-          <div th:if="${book.coverImage != ''}">
-            <a
-              href="#"
-              th:href="@{'/books/' + ${user.uid} + '/book?bookId=' + ${book.id}}"
-              th:attr="title=${book.title}"
-              ><img src="" th:src="@{${book.coverImage}}" alt="..."
-            /></a>
-          </div>
-          <div th:if="${book.coverImage == ''}">
-            <a
-              href="#"
-              th:href="@{'/books/' + ${user.uid} + '/book?bookId=' + ${book.id}}"
-              th:attr="title=${book.title}"
-              ><div>
-                <h4 th:text="${book.title}">Placeholder</h4>
-              </div></a
-            >
-          </div>
+      <br/>
+      <div class="books">
+        <div th:each="book: ${books}" >
+          <a class="book" th:if="${book.coverImage != ''}" href="#" th:href="@{'/books/' + ${user.uid} + '/book?bookId=' + ${book.id}}">
+            <div class="cover" >
+              <img src="" th:src="@{${book.coverImage}}" alt="..."/>
+            </div>
+            <div class="description">
+              <p class="title" th:text="${book.title}">Title</br>
+            </div>
+          </a>
+
+          <a class="book" th:if="${book.coverImage == ''}" href="#" th:href="@{'/books/' + ${user.uid} + '/book?bookId=' + ${book.id}}">
+            <div class="placeholder" >
+              <p class="title" th:text="${book.title}">Title</br>
+            </div>
+            <div class="description">
+              <p class="title" th:text="${book.title}">Title</br>
+            </div>
+          </a>
         </div>
       </div>
     </div>

@@ -3,46 +3,41 @@
   <head>
     <meta charset="ISO-8859-1" />
     <title th:text="${book.title}">Readlog Admin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
+      rel="shortcut icon"
+      href="https://raw.githubusercontent.com/joshua-philips/read_log_updated/master/assets/launcher.png"
+      type="image/x-icon"
     />
     <link th:href="@{/css/style.css}" rel="stylesheet" />
   </head>
   <body>
     <div>
-      <div th:insert="components/navbar :: navbar"></div>
+      <div th:insert="~{components/navbar :: navbar}"></div>
     </div>
-    <div>
-      <div class="card">
-        <div class="row g-0">
-          <div class="col-md-4 book">
-            <div th:if="${book.coverImage != ''}">
-              <img th:src="${book.coverImage}" alt="..." />
-            </div>
-            <div th:if="${book.coverImage == ''}">
-              <div>
-                <h4 th:text="${book.title}">Placeholder</h4>
-              </div>
-            </div>
+    <div class="content">
+      <div class="full-book">
+        <div class="book-large" th:if="${book.coverImage != ''}">
+          <div class="large-cover">
+            <img th:src="${book.coverImage}" alt="..." />
           </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 th:text="${book.title}">Name</h5>
-              <p th:text="${book.author}">Author name</p>
-              <p th:text="${book.summary}">Book description</p>
-              <p>
-                Published Date:
-                <small th:text="${book.firstPublishYear}">2020-01-01</small>
-              </p>
-              <p>
-                User Review:
-                <small th:text="${book.review}">Review</small>
-              </p>
-            </div>
+        </div>
+        <div class="book-large" th:if="${book.coverImage == ''}">
+          <div class="large-placeholder">
+            <h4 th:text="${book.title}">Placeholder</h4>
           </div>
+        </div>
+        <div class="book-details">
+          <h2 th:text="${book.title}">Name</h2>
+          <h3 th:text="${book.author}">Author name</h3>
+          <p th:text="${book.summary}">Book description</p>
+          <p>
+            Published Date:
+            <small th:text="${book.firstPublishYear}">2020-01-01</small>
+          </p>
+          <p th:if="${book.review != ''}">
+            User Review:
+            <small th:text="${book.review}">Review</small>
+          </p>
         </div>
       </div>
     </div>

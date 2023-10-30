@@ -2,28 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="ISO-8859-1" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <title>Users | Read Log Admin</title>
     <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link
+      rel="shortcut icon"
+      href="https://raw.githubusercontent.com/joshua-philips/read_log_updated/master/assets/launcher.png"
+      type="image/x-icon"
+    />
   </head>
   <body>
     <div>
       <div th:insert="~{components/navbar :: navbar}"></div>
-      <div>
-        <div th:each="user: ${users}">
-          <div>
-            <img src="..." alt="..." th:src="@{${user.photoUrl}}" />
-            <div>
-              <h5 th:text="${user.name}">Name</h5>
-              <p th:text="${user.email}">Email</p>
-              <a th:href="@{'/user/' + ${user.uid}}" href="/">User Details</a>
-            </div>
-          </div>
-        </div>
+      <div class="content">
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th></th>
+          </tr>
+          <tr th:each="user: ${users}">
+            <td th:text="${user.name}">Name</td>
+            <td th:text="${user.email}">Email</td>
+            <td>
+              <a th:href="@{'/user/' + ${user.uid}}" href="/" class="link"
+                >Details</a
+              >
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </body>
